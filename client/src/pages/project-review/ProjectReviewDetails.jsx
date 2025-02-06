@@ -3,8 +3,8 @@ import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 
 import { BASE_ORIGIN } from '../../config/config';
-import io from 'socket.io-client';
-const socket = io(BASE_ORIGIN, { withCredentials: true });
+// import io from 'socket.io-client';
+// const socket = io(BASE_ORIGIN, { withCredentials: true });
 
 
 

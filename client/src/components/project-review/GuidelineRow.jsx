@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getAuthUserFromLocalStorage } from '../../utility/localStorage';
 import { useCreateGuidelineComments, useGetGuidelineComments } from '../../hooks/guideline/useGuidelineComment';
 import GuidelineComment from '../comments/GuidelineComment';
-import { socket } from '../../utility/sockets';
+// import { socket } from '../../utility/sockets';
 import { useUpdateReviewProject } from '../../hooks/project-review/useReviewProject';
 
 

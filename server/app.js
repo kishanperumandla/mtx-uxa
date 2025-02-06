@@ -11,7 +11,6 @@ const app = express();
 
 
 
-
 // SOCKET IO SERVER on top of the HTTP server
 // const io = new Server(server, {
 //     cors: {
@@ -22,9 +21,6 @@ const app = express();
 //     }
 // });
 
-
-
-
 // Make io available to routes/controllers
 // app.set('io', io);
 
@@ -34,7 +30,7 @@ const app = express();
 
 // CONFIGURATIONS
 dotenv.config({ path: './.env' });
-app.use(cors({ origin: 'https://cerulean-naiad-d20c12.netlify.app', credentials: true }));
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 
 app.use(express.json());
 app.use(cookieParser());
