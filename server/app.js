@@ -7,24 +7,6 @@ const cookieParser = require('cookie-parser');
 // const { Server } = require('socket.io');
 
 const app = express();
-const server = http.createServer(app);
-
-
-
-// SOCKET IO SERVER on top of the HTTP server
-// const io = new Server(server, {
-//     cors: {
-//         origin: 'https://cerulean-naiad-d20c12.netlify.app', // Production on Netlify
-//         methods: ["GET", "POST"],
-//         credentials: true
-        
-//     }
-// });
-
-// Make io available to routes/controllers
-// app.set('io', io);
-
-
 
 
 
@@ -73,22 +55,6 @@ app.use('/api/v1/forecast', forecastRoutes);
 
 
 
-// // SOCKET IO Requests
-// io.on('connection', (socket)=>{
-//     socket.on('comment', (data)=>{
-//         console.log(data);
-
-//         socket.emit('commentResponse', data)
-        
-//     });
-
-//     socket.on('disconnect', () => {
-//         console.log('Clinet is disconnected');
-//     });
-// })
-
-
-
 
 // DATABASE Connections
 mongoose.connect(process.env.MONGODB_URL).then(
@@ -99,7 +65,7 @@ mongoose.connect(process.env.MONGODB_URL).then(
 
 
 // SERVER Starting
-server.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
 
