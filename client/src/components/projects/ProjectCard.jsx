@@ -63,6 +63,8 @@ export default function ProjectCard({proj}) {
     function handleEditProject(){
         // const updateData = {projectId: proj._id }
         // updateProjectMutationFn(data)
+
+        
     }
     
   
