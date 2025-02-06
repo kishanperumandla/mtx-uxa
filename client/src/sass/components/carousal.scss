@@ -1,0 +1,35 @@
+.cards-container{
+
+    // gap:1rem;
+    background-color: rgb(22, 157, 157);
+    width:400px;
+    // overflow-x: hidden;
+    // padding: 4px;
+    
+}
+
+.card-wrap{
+    display: flex;
+    flex-direction: row;
+    width: min-content  ;
+}
+
+.card{
+    min-width: 200px;
+    height:300px;
+    background-color: rgba(194, 223, 150, .75);
+    border: 1px solid rgb(233, 32, 85);    
+}
+
+.pips-container{
+    display: flex;
+    flex-direction: row;
+    gap:.5rem;
+}
+.pip{
+    width: 12px;
+    height:12px;
+    background-color: red;
+    border-radius: 50%;
+}
+

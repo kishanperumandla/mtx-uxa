@@ -1,0 +1,20 @@
+.forecast-view{
+    grid-column: 2/3;
+}
+
+
+.forecast-deet{
+    // border: 1px solid gray;
+    border-radius: 16px;
+    padding: .25rem 1rem;
+    background-color: rgb(226, 246, 255);
+    margin-bottom: .35rem;
+
+    .domain{
+        font-weight: 600;
+    }
+
+    .hour{
+
+    }
+}

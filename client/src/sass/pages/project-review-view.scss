@@ -1,0 +1,89 @@
+.project-review-view{
+    grid-column: 2/3;
+}
+
+
+
+.project-review-card{
+    background-color: rgb(255, 255, 255);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.team-avatars-container{
+    // background-color: rgb(195, 195, 195);
+    border-top: 1px solid rgb(213, 213, 213);
+    border-bottom: 1px solid rgb(213, 213, 213);
+    padding-block: .5rem;
+
+    .team-avatars-row{
+        display: flex;
+        gap:.5rem;
+        align-items: center;
+    }
+}
+
+
+.project-review-card-maincontent{
+    padding: 1rem ;
+}
+
+.project-review-card-deets{
+    // padding: 1rem ;
+}
+
+.deet-row{
+    display: flex;
+    gap:.5rem;
+
+    .label{
+        color:grey;
+    }
+    .value{
+        
+    }
+}
+
+
+.team-list-container{
+    border-radius: .75rem;
+    padding:1rem;
+    background-color: beige;
+}
+
+
+.team-list-row{
+  display:flex;
+  gap:.5rem;
+}
+
+
+
+  .review-score-panel{
+    background-color: #ffffff;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:.5rem;
+    border-left: 1px solid #d5d5d5;
+    padding: 1rem 0.65rem ;
+    text-transform: uppercase;
+  }
+
+  
+  .score-number{    
+    width:34px;
+    height:34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(107, 213, 96) ;
+    border-radius: 50%;
+    transform: rotate(90deg);
+    font-weight: 700;
+    font-size: 14px;
+    
+  }

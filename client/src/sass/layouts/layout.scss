@@ -1,0 +1,22 @@
+
+
+.main-container{
+    display: grid;
+    grid-template-rows: 72px calc(100vh - 72px);
+
+  } 
+
+
+  .main-content-container{
+    grid-row: 2/3;
+        
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+  } 
+  
+
+  
+  .full-width-page-content-container{
+    grid-row: 2/3;
+    height: 100%;
+  }
