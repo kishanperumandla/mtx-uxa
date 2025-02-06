@@ -12,7 +12,7 @@ const app = express();
 
 // CONFIGURATIONS
 dotenv.config({ path: './.env' });
-app.use(cors({ origin: 'https://cerulean-naiad-d20c12.netlify.app', credentials: true }));
+app.use(cors({ origin: 'https://incomparable-dolphin-4a99d9.netlify.app', credentials: true }));
 
 app.use(express.json());
 app.use(cookieParser());
