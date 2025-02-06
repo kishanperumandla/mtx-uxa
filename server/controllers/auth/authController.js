@@ -1,7 +1,7 @@
 const UserModel = require("../../models/user/userModel");
 const AppErrorGlobal = require("../../utility/appErrorGlobal");
 const asyncWrap = require("../../utility/ayncWrap");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 
