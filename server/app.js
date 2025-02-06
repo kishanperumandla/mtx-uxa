@@ -13,20 +13,20 @@ const server = http.createServer(app);
 
 
 // SOCKET IO SERVER on top of the HTTP server
-const io = new Server(server, {
-    cors: {
-        origin: 'https://cerulean-naiad-d20c12.netlify.app', // Production on Netlify
-        methods: ["GET", "POST"],
-        credentials: true
+// const io = new Server(server, {
+//     cors: {
+//         origin: 'https://cerulean-naiad-d20c12.netlify.app', // Production on Netlify
+//         methods: ["GET", "POST"],
+//         credentials: true
         
-    }
-});
+//     }
+// });
 
 
 
 
 // Make io available to routes/controllers
-app.set('io', io);
+// app.set('io', io);
 
 
 
