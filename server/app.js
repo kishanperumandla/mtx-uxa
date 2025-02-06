@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 // const { Server } = require('socket.io');
 
 const app = express();
-// const server = http.createServer(app);
+const server = http.createServer(app);
 
 
 
@@ -30,7 +30,7 @@ const app = express();
 
 // CONFIGURATIONS
 dotenv.config({ path: './.env' });
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors({ origin: 'https://cerulean-naiad-d20c12.netlify.app', credentials: true }));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -99,7 +99,7 @@ mongoose.connect(process.env.MONGODB_URL).then(
 
 
 // SERVER Starting
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
 
