@@ -14,10 +14,11 @@ const server = http.createServer(app);
 // SOCKET IO SERVER on top of the HTTP server
 const io = new Server(server, {
     cors: {
-        origin: ['http://localhost:5173',
-        'https://cerulean-naiad-d20c12.netlify.app'], // Production on Netlify
+        origin: 
+        'https://cerulean-naiad-d20c12.netlify.app', // Production on Netlify
         methods: ["GET", "POST"],
         credentials: true
+        
     }
 });
 
