@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const http = require('http');
 const cookieParser = require('cookie-parser');
-const { Server } = require('socket.io');
+// const { Server } = require('socket.io');
 
 const app = express();
-const server = http.createServer(app);
+// const server = http.createServer(app);
 
 
 
@@ -103,7 +103,7 @@ mongoose.connect(process.env.MONGODB_URL).then(
 
 
 // SERVER Starting
-server.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
 
