@@ -34,7 +34,7 @@ export default function Sidebar({handleMainContentContainerShrink}) {
 
   
   useEffect(()=>{
-    console.log(sidebarRef.current.style.width);
+    // console.log(sidebarRef.current.style.width);
     sidebarRef.current.style.width = '15rem';
 
   },[sidebarRef, sidebarWidth])

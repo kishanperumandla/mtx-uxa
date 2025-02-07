@@ -48,7 +48,7 @@ export default function Projects() {
         <CreateProject/>
 
         { projects?.length>0 ? 
-            <Grid2 container spacing={3}>          
+            <Grid2 container spacing={5}>          
               { projects?.map(proj => <ProjectCard key={proj._id} proj={proj}/>)}
             </Grid2>
           :

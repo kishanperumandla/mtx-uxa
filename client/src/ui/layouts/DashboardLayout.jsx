@@ -9,8 +9,7 @@ import { useEffect, useRef, useState } from "react"
 export default function DashboardLayout() {
     const mainContentContainerRef =  useRef(null);
     const [mainContentContainer, setMainContentContainer] = useState(null)
-    
-    console.log(mainContentContainer);
+    // console.log(mainContentContainer);
     
 
     function handleMainContentContainerShrink(){

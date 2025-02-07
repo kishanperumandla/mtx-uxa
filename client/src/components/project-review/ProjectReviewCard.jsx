@@ -13,6 +13,7 @@ import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import ZoomOutMapOutlinedIcon from '@mui/icons-material/ZoomOutMapOutlined';
 import OpenInFullOutlinedIcon from '@mui/icons-material/OpenInFullOutlined';
 
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -24,7 +25,6 @@ const style = {
     boxShadow: 24,
     p: 4,
   };
-
 
 
   const avatarStyle= {
@@ -52,13 +52,8 @@ export default function ProjectReviewCard({project}) {
     const reviewerTeam = project?.reviewTeam.filter(team => team.reviewRole === "Reviewer");
     const revieweeTeam = project?.reviewTeam.filter(team => team.reviewRole === "Reviewee");
 
-    // console.log(reviewerTeam);
-    // console.log(revieweeTeam);
-
+    // console.log(reviewerTeam);    
     console.log(project);
-    
-
-
     
 
     // CREATE Review Project
@@ -87,7 +82,7 @@ export default function ProjectReviewCard({project}) {
             <Box className='project-review-card-maincontent' flexGrow={1}>
                 <Typography variant="h4"  mb={1}> {project.projectID.projectName} </Typography>
                 
-                {/* Deetails */}
+                {/* Details */}
                 <Box className="project-review-card-deets" mb={1}>
                     <Box className="deet-row">
                         <Typography className='label'> Review Phase: </Typography>
@@ -100,42 +95,31 @@ export default function ProjectReviewCard({project}) {
                     </Box>
                 </Box>
 
+
                 {/* Team List */}
                 <Box className="team-avatars-container"  mb={2} > 
-
                     <Typography mb={1} fontSize={13} textTransform={'uppercase'} fontWeight={500}  >Team</Typography>
                     <Box className='team-avatars-row'>
                         { project?.reviewTeam.map(team =>                             
                             <Box key={team._id} component="img"  src={`${BASE_ORIGIN}/uploads/${team.teamMemberID.avatar}`}  sx={avatarStyle} alt="Example" />                                                         
                         )}
 
-                        <IconButton size="small" color='gray' aria-label="Show Creds" onClick={()=>setShowFullTeam(true)} > <OpenInFullOutlinedIcon /> </IconButton>
+                        <IconButton size="small"  sx={{ color: '#3333' }}  aria-label="Show Creds" onClick={()=>setShowFullTeam(true)} > <OpenInFullOutlinedIcon /> </IconButton>
                     </Box>
-
-
-                    {/* <Box>
-                        <Typography mb={.5} fontSize={13} textTransform={'uppercase'} fontWeight={500} >Reviewee</Typography>
-                        { revieweeTeam.map(team => 
-                            <Box key={team._id} className='team-list-row' mb={1}>
-                                <Box component="img"  src={`${BASE_ORIGIN}/uploads/${team.teamMemberID.avatar}`}  sx={avatarStyle} alt="Example" /> 
-                                <Typography> {team.teamMemberID.firstName} </Typography>
-                            </Box>
-                        )}                        
-                    </Box> */}
 
                 </Box>
 
 
-                {/* Credentials */}   
+                {/* POPUP - Credentials */}   
                 <Stack direction='row'  justifyContent='space-between'  >                     
                     <Box>
-                        <IconButton aria-label="Show Creds" size="small" onClick={()=>setShowCreds(true)} > <BadgeOutlinedIcon /> </IconButton>
+                        <IconButton aria-label="Show Creds" color='primary' size="small" onClick={()=>setShowCreds(true)} > <BadgeOutlinedIcon /> </IconButton>
 
                         {showCreds &&
-                            <CredentialsViewMotion initial={{scale: 0.85}} animate={ { scale: 1 }}  bgcolor={'#ffffff'} p={2} position='absolute' top='0px' left='0px' height="100%" width="100%" zIndex='10' >
+                            <CredentialsViewMotion initial={{scale: 0.85}} animate={ { scale: 1 }}  bgcolor={'#cee6ff'} p={2} position='absolute' top='0px' left='0px' height="100%" width="100%" zIndex='10' >
                                 {/* Title and Close */}
                                 <Stack direction="row" spacing={1} alignItems='center' mb={2} justifyContent='space-between'>
-                                    <Typography color='grey'> Project Credentials </Typography>
+                                    <Typography color='#265996'> Project Credentials </Typography>
                                     <IconButton aria-label="Show Creds" size="small" onClick={()=>setShowCreds(false)} > <HighlightOffIcon /> </IconButton>    
                                 </Stack>
                                 
@@ -177,36 +161,35 @@ export default function ProjectReviewCard({project}) {
                         {/* <IconButton aria-label="Show Creds" size="small" onClick={()=>setShowFullTeam(true)} > <GroupsOutlinedIcon /> </IconButton> */}
 
                         {showFullTeam &&
-                            <TeamFullViewMotion initial={{scale: 0.85}} animate={ { scale: 1 }} sx={{overflowY:'scroll'}}  bgcolor={'#ffffff'} p={2} position='absolute' top='0px' left='0px' height="100%" width="100%" zIndex='10' >
+                            <TeamFullViewMotion initial={{scale: 0.85}} animate={ { scale: 1 }} sx={{overflowY:'scroll'}}  bgcolor={'#cee6ff'} p={2} position='absolute' top='0px' left='0px' height="100%" width="100%" zIndex='10' >
                                 {/* Title and Close */}
                                 <Stack direction="row" spacing={1} alignItems='center' mb={2} justifyContent='space-between'>
-                                    <Typography color='grey'> Project Review Team </Typography>
+                                    <Typography color='#265996'> Project Review Team </Typography>
                                     <IconButton aria-label="Show Creds" size="small" onClick={()=>setShowFullTeam(false)} > <HighlightOffIcon /> </IconButton>    
                                 </Stack>
                                 
-                                {/* Team Details */}
+                                {/* POPUP - Team Details */}
                                 <Stack className="team-list-container" direction="row" spacing={4} mb={2} p={3} > 
 
-                                        <Box>
-                                            <Typography mb={1} fontSize={13} textTransform={'uppercase'} fontWeight={600} >Reviewers</Typography>
-                                            { reviewerTeam.map(team => 
-                                                <Box key={team._id} className='team-list-row' mb={1}>
-                                                    <Box component="img"  src={`${BASE_ORIGIN}/uploads/${team.teamMemberID.avatar}`}  sx={avatarStyle} alt="Example" /> 
-                                                    <Box>
-                                                        <Typography> {team.teamMemberID.firstName} </Typography>
-                                                        
-                                                        {/* Domains */}
-                                                        <Stack>
-                                                            {team.reviewDomain.map((dom, index)=> <Typography variant='caption'  key={index}> - {dom} </Typography> )}                                                     
-                                                        </Stack>
-                                                    </Box>
+                                    <Box>
+                                        <Typography mb={1} fontSize={13} textTransform={'uppercase'} fontWeight={600} >Reviewers</Typography>
+                                        { reviewerTeam.map(team => 
+                                            <Box key={team._id} className='team-list-row' mb={1}>
+                                                <Box component="img"  src={`${BASE_ORIGIN}/uploads/${team.teamMemberID.avatar}`}  sx={avatarStyle} alt="Example" /> 
+                                                <Box>
+                                                    <Typography> {team.teamMemberID.firstName} </Typography>
                                                     
+                                                    {/* Domains */}
+                                                    <Stack>
+                                                        {team.reviewDomain.map((dom, index)=> <Typography variant='caption'  key={index}> - {dom} </Typography> )}                                                     
+                                                    </Stack>
                                                 </Box>
-                                            )}
-                                        </Box>
+                                                
+                                            </Box>
+                                        )}
+                                    </Box>
 
-
-                                        <Box>
+                                    <Box>
                                         <Typography mb={1} fontSize={13} textTransform={'uppercase'} fontWeight={600} >Reviewee</Typography>
                                             { revieweeTeam.map(team => 
                                                 <Box key={team._id} className='team-list-row' mb={1}>
@@ -221,9 +204,9 @@ export default function ProjectReviewCard({project}) {
                                                     </Box>
                                                 </Box>
                                             )}                        
-                                        </Box>
+                                    </Box>
 
-                                    </Stack>                                   
+                                </Stack>                                   
                                 
                             </TeamFullViewMotion>
                         }
