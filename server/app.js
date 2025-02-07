@@ -12,7 +12,7 @@ const app = express();
 
 // CONFIGURATIONS
 dotenv.config({ path: './.env' });
-app.use(cors({ origin: 'https://mtx-uxa.netlify.app', credentials: true }));
+app.use(cors({ origin: ['https://mtx-uxa.netlify.app', 'http://localhost:5173'], credentials: true }));
 
 app.use(express.json());
 app.use(cookieParser());
