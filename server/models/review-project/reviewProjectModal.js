@@ -48,7 +48,11 @@ const ReviewProjectSchema =  mongoose.Schema({
     projectHealth:String,
     designFile:String,
     devCreds:String,    
-    lastReviewDate: Date,    
+    lastReviewDate: Date, 
+    totalReviewScore:{
+        type:String,
+        default:0
+    } 
 })
 
 

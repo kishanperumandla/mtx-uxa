@@ -89,56 +89,68 @@ exports.updateReviewProject = asyncWrap(async (req, res, next) => {
         return next(new AppErrorGlobal("No project update data is received", 400));
     }
 
+    console.log("🍎 Incoming Update Request:", req.body);
 
-    console.log("🍎", req.body);
-    
+    let filter, update, options;
+    const { guidelineScore, guidelineStatus, editReviewProject, reviewProjectId, reviewGuidelineId } = req.body;
 
-    let filter;
-    let update;
-    let options;
+    if (guidelineScore !== undefined) {
+        // Update the specific guideline score
+        filter = { _id: reviewProjectId, "reviewGuidelines._id": reviewGuidelineId };
+        update = { "reviewGuidelines.$.guidelineScore": guidelineScore };
+        options = { new: true };
 
-    const {guidelineScore } = req.body;
-    const { guidelineStatus } = req.body;
-    const { editReviewProject } = req.body;
-    
+        // Update review project with the new score
+        const updatedReviewProject = await ReviewProjectModel.findOneAndUpdate(filter, update, options);
+        if (!updatedReviewProject) {
+            return next(new AppErrorGlobal("No review project was updated", 400));
+        }
 
-    
-    if(guidelineScore) {
-        const { reviewProjectId, reviewGuidelineId } = req.body;
-        filter = {_id:reviewProjectId, "reviewGuidelines._id":reviewGuidelineId}; // Find project and specific guideline
-        update = {"reviewGuidelines.$.guidelineScore": guidelineScore} // Update the guidelineScore      
-        options = { new: true }
+        // Calculate new totalReviewScore (average of all guidelineScores)
+        const totalScore = updatedReviewProject.reviewGuidelines.reduce((sum, guideline) => sum + guideline.guidelineScore, 0);
+        const avgScore = totalScore / updatedReviewProject.reviewGuidelines.length;
+
+        // Update totalReviewScore in the database
+        const finalUpdatedProject = await ReviewProjectModel.findByIdAndUpdate(
+            reviewProjectId,
+            { totalReviewScore: avgScore.toFixed(2) }, // Keeping two decimal places
+            { new: true }
+        );
+
+        return res.status(200).json({
+            status: 200,
+            message: "Review project score updated successfully",
+            data: finalUpdatedProject
+        });
     }
 
-    if(guidelineStatus) {
-        const { reviewProjectId, reviewGuidelineId } = req.body;
-        filter = {_id:reviewProjectId, "reviewGuidelines._id":reviewGuidelineId}; // Find project and specific guideline
-        update = {"reviewGuidelines.$.guidelineStatus": guidelineStatus} // Update the guidelineScore      
-        options = { new: true }
+    if (guidelineStatus !== undefined) {
+        filter = { _id: reviewProjectId, "reviewGuidelines._id": reviewGuidelineId };
+        update = { "reviewGuidelines.$.guidelineStatus": guidelineStatus };
+        options = { new: true };
     }
 
-    if(editReviewProject){
+    if (editReviewProject) {
         let { reviewProjectId, ...updateData } = req.body;
-        filter = {_id: reviewProjectId};
+        filter = { _id: reviewProjectId };
         update = updateData;
-        options = { new: true }
+        options = { new: true };
     }
-    
 
-
-    // Update
-    const updatedReviewProject = await ReviewProjectModel.findOneAndUpdate(filter, update, { new: true } );
+    // General update operation
+    const updatedReviewProject = await ReviewProjectModel.findOneAndUpdate(filter, update, { new: true });
 
     if (!updatedReviewProject) {
-        return next(new AppErrorGlobal("No review project is updated", 400));
+        return next(new AppErrorGlobal("No review project was updated", 400));
     }
 
     res.status(200).json({
         status: 200,
-        message: "Review project is updated successfully",
+        message: "Review project updated successfully",
         data: updatedReviewProject
     });
 });
+
 
 
 

@@ -15,7 +15,10 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 
-import {AreaChart, Area, ResponsiveContainer, XAxis, YAxis, CartesianGrid } from 'reCharts'
+import {AreaChart, Area, ResponsiveContainer, XAxis, YAxis, CartesianGrid, PieChart, Pie, Sector, Cell,  } from 'reCharts'
+
+
+
 
 
 const projectThumbStyle= {
@@ -75,8 +78,6 @@ export default function Dashboard(){
     
     
     
-
-
     return(
         <Box sx={{p:4}} className='dashboard-view' >
             <Typography variant='h1' mb={2}>Dashboard</Typography>   
@@ -94,53 +95,80 @@ export default function Dashboard(){
                 </Stack>
             }
 
+
+            {/* Project Stats Panel */}
+
             <Box sx={{py:3}}>
                 <Grid2 container spacing={3} >
+                    <Grid2 size={6}>
+                        <Box sx={{backgroundColor:'white', p:2}}>
+                            <Typography variant="h5" sx={{borderBottom:'1px solid grey'}} mb={1} pb={1}>Projects Stats</Typography>
+                           
+                            <Stack mb={.25} direction='row' spacing={2} alignItems='center'>
+                                <Stack direction='row' spacing={.5} alignItems='center'>
+                                    <IconButton color='success'> <StarIcon/> </IconButton>
+                                    <Typography fontWeight={500}>Excellent Projects</Typography>                            
+                                </Stack> 
+                                <Stack direction='row' spacing={.5} alignItems='center'>
+                                    {reviewProjectStats?.badProjects.map(proj => <Chip key={proj._id} label={proj.project.projectName} size="small" color="success" variant="outlined"/>   )}
+                                </Stack>                                                      
 
-                    <Stack sx={{backgroundColor:'white', p:2}}  direction='column' alignItems='start' spacing={1} >
-                        <Typography variant="h5">Projects Stats</Typography>
+                            </Stack>
 
-                        <Stack direction='row' spacing={.5} alignItems='center'>
-                            <IconButton color='success'> <StarIcon/> </IconButton>
-                            <Typography>Excellent Projects</Typography>                            
-                            <Chip label='4' size="small" color="#b1eabe"  />
-                        </Stack>
-                        <Stack direction='row' spacing={.5} alignItems='center'>
-                            <IconButton color='primary'> <TagFacesIcon/> </IconButton>
-                            <Typography>Good Projects</Typography>
-                            <Chip label='4' size="small" color="#aecef4"  />
-                        </Stack>
-                        <Stack direction='row' spacing={.5} alignItems='center'>
-                            <IconButton color='warning'> <ThumbDownOffAltIcon/> </IconButton>
-                            <Typography>Bad Projects</Typography>
-                            <Chip label='4' size="small" color="#ead0b1"  />
-                        </Stack>
-            
-                    </Stack>
+                            <Stack mb={.25} direction='row' spacing={2} alignItems='center'>
+                                <Stack direction='row' spacing={.5} alignItems='center'>
+                                    <IconButton color='primary'> <TagFacesIcon/> </IconButton>
+                                    <Typography fontWeight={500}>Good Projects</Typography>                            
+                                </Stack> 
+                                <Stack direction='row' spacing={.5} alignItems='center'>
+                                    {reviewProjectStats?.goodProjects.map(proj => <Chip key={proj._id} label={proj.project.projectName} size="small" color="primary" variant="outlined"/>   )}
+                                </Stack>                                                      
 
-                    <Stack sx={{backgroundColor:'white', p:2}} direction='column' alignItems='start' spacing={1} >
-                        <Typography variant="h5">Forecast Stats</Typography>
-                        <Typography>5 - Available for Development </Typography>
-                        <Typography>10 - Available for Design </Typography>
-                        <Typography>2 - Available for A11Y</Typography>
-                    </Stack>
+                            </Stack>
+
+                            <Stack mb={.25} direction='row' spacing={2} alignItems='center'>
+                                <Stack direction='row' spacing={.5} alignItems='center'>
+                                    <IconButton color='warning'> <ThumbDownOffAltIcon/> </IconButton>
+                                    <Typography fontWeight={500}>Bad Projects</Typography>                            
+                                </Stack> 
+                                <Stack direction='row' spacing={.5} alignItems='center'>
+                                    {reviewProjectStats?.badProjects.map(proj => <Chip key={proj._id} label={proj.project.projectName} size="small" color="warning" variant="outlined"/>   )}
+                                </Stack>                                                      
+
+                            </Stack>                
+                        </Box>
+                    </Grid2>
+
+
+                    <Grid2 size={6}>
+                        <Stack sx={{backgroundColor:'white', p:2}} direction='column' alignItems='start' spacing={1} >
+                            <Typography variant="h5">Forecast Stats</Typography>
+                            <Typography>5 - Available for Development </Typography>
+                            <Typography>10 - Available for Design </Typography>
+                            <Typography>2 - Available for A11Y</Typography>
+                        </Stack>
+                    </Grid2>
+
                 </Grid2>
             </Box>
 
 
 
-
+            {/* CHART 1 */}
             <Box bgcolor='white' p={2} borderRadius={2}>
                 <ResponsiveContainer width="100%" height={200}>
-                    <AreaChart width={200} height={400} data={projectScores} >
+                    <AreaChart width={200} height={400} data={reviewProjectStats?.allProjectsScores} >
                         <CartesianGrid strokeDasharray='5 5'/>
                         <XAxis dataKey='projectName'/>  
                         <YAxis/>
-                        <Area type="monotone" fill="#ffb5b5ec" stroke="#ffb5b5ec" stackId='1' dataKey='score'/>
+                        <Area type="monotone" fill="#ffb5b5ec" stroke="#ffb5b5ec" stackId='1' dataKey='totalReviewScore'/>
                     </AreaChart>
                 </ResponsiveContainer>
             </Box>
-            
+
+
+
+
 
 
 
