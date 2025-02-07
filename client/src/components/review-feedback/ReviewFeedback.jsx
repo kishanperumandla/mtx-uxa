@@ -19,8 +19,7 @@ export default function ReviewFeedback({reviewProject}) {
     // console.log(filteredReviewFeedbacks);
     
   return (
-    <>
-
+    <Box>
         <CreateFeedback reviewProject={reviewProject}/>               
 
         {
@@ -28,6 +27,6 @@ export default function ReviewFeedback({reviewProject}) {
           <FeedbackBox key={feedback._id} index={index} feedback={feedback} reviewProject={reviewProject} />
         )    
         }
-    </>
+    </Box>
   )
 }

@@ -15,7 +15,11 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 
-import {AreaChart, Area, ResponsiveContainer, XAxis, YAxis, CartesianGrid, PieChart, Pie, Sector, Cell,  } from 'reCharts'
+import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
+import SportsScoreOutlinedIcon from '@mui/icons-material/SportsScoreOutlined';
+import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
+
+import {AreaChart, Area,  ResponsiveContainer, XAxis, YAxis, CartesianGrid, PieChart, Pie, Sector, Cell, BarChart, Bar, Rectangle,Tooltip, Legend, } from 'reCharts'
 
 
 
@@ -81,7 +85,6 @@ export default function Dashboard(){
     return(
         <Box sx={{p:4}} className='dashboard-view' >
             <Typography variant='h1' mb={2}>Dashboard</Typography>   
-
                    
             {                
                 <Stack direction="row" spacing={2} alignItems='center' py={2} borderBottom={1} borderColor={'primary.main'} mb={2} >       
@@ -91,71 +94,77 @@ export default function Dashboard(){
                         <AccountCircleIcon/> 
                     }
                     
-                    {currentUser && <Typography  variant='h5' > Welcome   {currentUser.firstName + " " + currentUser.lastName }</Typography>                }
+                    {currentUser && <Typography  variant='h5'> Welcome   {currentUser.firstName + " " + currentUser.lastName }</Typography>                }
                 </Stack>
             }
 
 
-            {/* Project Stats Panel */}
-
-            <Box sx={{py:3}}>
-                <Grid2 container spacing={3} >
-                    <Grid2 size={6}>
-                        <Box sx={{backgroundColor:'white', p:2}}>
-                            <Typography variant="h5" sx={{borderBottom:'1px solid grey'}} mb={1} pb={1}>Projects Stats</Typography>
-                           
-                            <Stack mb={.25} direction='row' spacing={2} alignItems='center'>
-                                <Stack direction='row' spacing={.5} alignItems='center'>
-                                    <IconButton color='success'> <StarIcon/> </IconButton>
-                                    <Typography fontWeight={500}>Excellent Projects</Typography>                            
-                                </Stack> 
-                                <Stack direction='row' spacing={.5} alignItems='center'>
-                                    {reviewProjectStats?.badProjects.map(proj => <Chip key={proj._id} label={proj.project.projectName} size="small" color="success" variant="outlined"/>   )}
-                                </Stack>                                                      
-
-                            </Stack>
-
-                            <Stack mb={.25} direction='row' spacing={2} alignItems='center'>
-                                <Stack direction='row' spacing={.5} alignItems='center'>
-                                    <IconButton color='primary'> <TagFacesIcon/> </IconButton>
-                                    <Typography fontWeight={500}>Good Projects</Typography>                            
-                                </Stack> 
-                                <Stack direction='row' spacing={.5} alignItems='center'>
-                                    {reviewProjectStats?.goodProjects.map(proj => <Chip key={proj._id} label={proj.project.projectName} size="small" color="primary" variant="outlined"/>   )}
-                                </Stack>                                                      
-
-                            </Stack>
-
-                            <Stack mb={.25} direction='row' spacing={2} alignItems='center'>
-                                <Stack direction='row' spacing={.5} alignItems='center'>
-                                    <IconButton color='warning'> <ThumbDownOffAltIcon/> </IconButton>
-                                    <Typography fontWeight={500}>Bad Projects</Typography>                            
-                                </Stack> 
-                                <Stack direction='row' spacing={.5} alignItems='center'>
-                                    {reviewProjectStats?.badProjects.map(proj => <Chip key={proj._id} label={proj.project.projectName} size="small" color="warning" variant="outlined"/>   )}
-                                </Stack>                                                      
-
-                            </Stack>                
-                        </Box>
-                    </Grid2>
-
-
-                    <Grid2 size={6}>
-                        <Stack sx={{backgroundColor:'white', p:2}} direction='column' alignItems='start' spacing={1} >
-                            <Typography variant="h5">Forecast Stats</Typography>
-                            <Typography>5 - Available for Development </Typography>
-                            <Typography>10 - Available for Design </Typography>
-                            <Typography>2 - Available for A11Y</Typography>
+            {/* PROJECT STATS and FORECAST Panel */}        
+            <Grid2 container spacing={3} sx={{py:3}} >
+                {/* Project Stats */}
+                <Grid2 size={6}>
+                    <Box sx={{backgroundColor:'white', p:2,  borderRadius:'8px'}}>
+                        <Stack direction='row' spacing={.5} alignItems='center' sx={{borderBottom:'1px solid #cecece'}}  mb={1} pb={1.5}>
+                            <HealthAndSafetyOutlinedIcon sx={{color:'#9a9a9a'}}/>
+                            <Typography variant="h5" >Projects Health</Typography>
                         </Stack>
-                    </Grid2>
+                        
+                        <Stack mb={.25} direction='row' spacing={2} alignItems='center'>
+                            <Stack direction='row' spacing={.5} alignItems='center'>
+                                <IconButton color='success'> <StarIcon/> </IconButton>
+                                <Typography fontWeight={500}>Excellent</Typography>                            
+                            </Stack> 
+                            <Stack direction='row' spacing={.5} alignItems='center'>
+                                {reviewProjectStats?.badProjects.map(proj => <Chip key={proj._id} label={proj.project.projectName} size="small" color="success" variant="outlined"/>   )}
+                            </Stack>                                                      
 
+                        </Stack>
+
+                        <Stack mb={.25} direction='row' spacing={2} alignItems='center'>
+                            <Stack direction='row' spacing={.5} alignItems='center'>
+                                <IconButton color='primary'> <TagFacesIcon/> </IconButton>
+                                <Typography fontWeight={500}>Good</Typography>                            
+                            </Stack> 
+                            <Stack direction='row' spacing={.5} alignItems='center'>
+                                {reviewProjectStats?.goodProjects.map(proj => <Chip key={proj._id} label={proj.project.projectName} size="small" color="primary" variant="outlined"/>   )}
+                            </Stack>                                                      
+
+                        </Stack>
+
+                        <Stack mb={.25} direction='row' spacing={2} alignItems='center'>
+                            <Stack direction='row' spacing={.5} alignItems='center'>
+                                <IconButton color='warning'> <ThumbDownOffAltIcon/> </IconButton>
+                                <Typography fontWeight={500}>Poor</Typography>                            
+                            </Stack> 
+                            <Stack direction='row' spacing={.5} alignItems='center'>
+                                {reviewProjectStats?.badProjects.map(proj => <Chip key={proj._id} label={proj.project.projectName} size="small" color="warning" variant="outlined"/>   )}
+                            </Stack>                                                      
+
+                        </Stack>                
+                    </Box>
                 </Grid2>
-            </Box>
+
+
+                {/* Forecast */}
+                <Grid2 size={6}>
+                    <Box sx={{backgroundColor:'white', p:2,  borderRadius:'8px'}}>                                                
+                        <Stack direction='row' spacing={.5} alignItems='center' sx={{borderBottom:'1px solid #cecece'}}  mb={1} pb={1.5}>
+                            <DateRangeOutlinedIcon sx={{color:'#9a9a9a'}}/>
+                            <Typography variant="h5" >Team Forecast</Typography>
+                        </Stack>
+                        <Typography>5 - Available for Development </Typography>
+                        <Typography>10 - Available for Design </Typography>
+                        <Typography>2 - Available for A11Y</Typography>
+                    </Box>                    
+                </Grid2>
+
+            </Grid2>
+     
 
 
 
-            {/* CHART 1 */}
-            <Box bgcolor='white' p={2} borderRadius={2}>
+            {/* CURV CHART */}            
+            {/* <Box bgcolor='white' p={2} borderRadius={2}>
                 <ResponsiveContainer width="100%" height={200}>
                     <AreaChart width={200} height={400} data={reviewProjectStats?.allProjectsScores} >
                         <CartesianGrid strokeDasharray='5 5'/>
@@ -164,6 +173,38 @@ export default function Dashboard(){
                         <Area type="monotone" fill="#ffb5b5ec" stroke="#ffb5b5ec" stackId='1' dataKey='totalReviewScore'/>
                     </AreaChart>
                 </ResponsiveContainer>
+            </Box> */}
+            
+
+
+            {/* BAR CHART */}
+            <Box bgcolor='white' p={2} borderRadius={2}>
+                <Stack direction='row' spacing={.5} alignItems='center' sx={{borderBottom:'1px solid #cecece'}}  mb={4} pb={1.5}>
+                    <SportsScoreOutlinedIcon sx={{color:'#9a9a9a'}}/>
+                    <Typography variant="h5" >Project Score Trends</Typography>
+                </Stack>                
+              
+                <ResponsiveContainer width="100%" height={200}>
+                    <BarChart
+                        width={500}
+                        height={300}
+                        data={reviewProjectStats?.allProjectsScores}
+                        margin={{
+                            top: 5,
+                            right: 30,
+                            left: 20,
+                            bottom: 5,
+                        }}
+                        >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="projectName" />
+                        <YAxis domain={[0, 5]} ticks={[0, 1, 2, 3, 4, 5]} />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="totalReviewScore" fill="#4b9ee3" activeBar={<Rectangle fill="#64b4f6" stroke="#64b4f6" />} />
+                        {/* <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} /> */}
+                        </BarChart>
+                </ResponsiveContainer>
             </Box>
 
 
@@ -171,11 +212,7 @@ export default function Dashboard(){
 
 
 
-
-
-
             {/* <Caraousal/> */}
-
 
 
             {/* <Typography color='secondary' variant="h1" gutterBottom>

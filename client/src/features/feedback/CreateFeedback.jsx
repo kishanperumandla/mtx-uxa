@@ -90,7 +90,7 @@ export default function CreateFeedback({reviewProject}) {
     return (
     <div>
 
-        <Stack direction='row' justifyContent='space-between'>
+        <Stack direction='row' justifyContent='space-between' mb={2}>
           <Typography variant='h2'>Detailed Feedback</Typography> 
           <Button variant='contained' onClick={handleOpen} startIcon={<AddIcon/>} >Create Feedback </Button>
         </Stack>

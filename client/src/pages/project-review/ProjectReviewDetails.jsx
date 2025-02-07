@@ -76,19 +76,19 @@ export default function ProjectReviewDetails(){
 
     return (
         <Box sx={{p:4}} className="project-review-details-view">
-            <Stack direction='row'  justifyContent='space-between'  alignItems='center'>
+            <Stack direction='row'  justifyContent='space-between'  alignItems='center' mb={4}>
                 <Typography variant='h1'> {reviewProject.projectID.projectName} Review</Typography>
                 <IconButton onClick={()=>navigate(-1) }> <KeyboardBackspaceIcon color={'primary'}/> </IconButton>
             </Stack>
             
-            <Box sx={{py:2}}>
-                <Stack direction='row' spacing={0}>
-                    <NavLink style={showGuidelines ? { color:'white', backgroundColor:'#0856c8', padding: '.5rem 3.75rem'   } : { color:'white', backgroundColor:'#ababab', padding: '.5rem 3.75rem'  } } onClick={ (e)=> { e.preventDefault();  setShowGuidelines(true); setShowFeedback(false)  } }>Guidelines</NavLink>
-                    <NavLink style={showFeedback ? { color:'white', backgroundColor:'#0856c8', padding: '.5rem 3.75rem'   }: { color:'white', background:'#ababab', padding: '.5rem 3.75rem' } } onClick={ (e)=> { e.preventDefault();  setShowGuidelines(false); setShowFeedback(true)  } }>Feedback</NavLink>
-                </Stack>
-            </Box>
+            {/* TABS Buttons */}
+            <Stack direction="row" alignItems='center' gap={1}  sx={{py:2, borderBottom:'1px solid gray'}} mb={2}>                
+                <NavLink style={showGuidelines ? { color:'white', backgroundColor:'#007ade', borderRadius:10, padding: '.5rem 3.75rem'   } : { color:'white', backgroundColor:'#ababab', borderRadius:10, padding: '.5rem 3.75rem'  } } onClick={ (e)=> { e.preventDefault();  setShowGuidelines(true); setShowFeedback(false)  } }>Guidelines</NavLink>
+                <NavLink style={showFeedback ? { color:'white', backgroundColor:'#007ade', borderRadius:10, padding: '.5rem 3.75rem'   }: { color:'white', background:'#ababab', borderRadius:10, padding: '.5rem 3.75rem' } } onClick={ (e)=> { e.preventDefault();  setShowGuidelines(false); setShowFeedback(true)  } }>Feedback</NavLink>
+            </Stack>
             
 
+            
             {
                 showFeedback &&
                 <div> <ReviewFeedback reviewProject={reviewProject} /> </div>

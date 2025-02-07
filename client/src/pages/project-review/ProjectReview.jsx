@@ -37,7 +37,7 @@ export default function ProjectReview() {
     
   })
 
-  console.log(updatedReviewProjects);
+  // console.log(updatedReviewProjects);
   
 
   
